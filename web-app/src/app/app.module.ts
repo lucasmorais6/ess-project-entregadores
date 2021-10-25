@@ -6,12 +6,14 @@ import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NavbarComponent } from './navbar/navbar.component';
 import { CarsComponent } from './cars/cars.component';
 import { CarService } from './cars/cars.service';
 
 @NgModule({
   declarations: [
     AppComponent,
+    NavbarComponent,
     CarsComponent
   ],
   imports: [
