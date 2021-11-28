@@ -2,10 +2,11 @@
 
 Grupo X
 1. Lucas Morais de Araújo(lma6)
-2.
-3.
-4.
-5.
+2.Igor Costa da Silva Estevão de Azevedo(icsea) 
+3. Pedro Henrique Sarmento de Paula(phsp)
+4. Layse Roberta da Silva Araújo (lrsa)
+5-
+
 
 ## Estrutura do projeto e informações necessárias
 
