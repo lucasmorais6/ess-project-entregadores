@@ -1,4 +1,13 @@
-# Estrutura do projeto a ser utilizado na disciplina de ESS
+# Projeto Entregadores - ESS-EC 2022 
+
+Grupo X
+1. Lucas Morais de Araújo(lma6)
+2.
+3.
+4.
+5.
+
+## Estrutura do projeto e informações necessárias
 
 ### Dependências
 
