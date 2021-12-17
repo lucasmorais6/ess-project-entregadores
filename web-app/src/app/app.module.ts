@@ -9,12 +9,14 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CarsComponent } from './cars/cars.component';
 import { CarService } from './cars/cars.service';
-
+import { EntregasComponent } from './entregas/entregas.component';
+import { EntregaService } from './entregas/entregas.service';
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    CarsComponent
+    CarsComponent,
+    EntregasComponent
   ],
   imports: [
     BrowserModule,
@@ -25,10 +27,14 @@ import { CarService } from './cars/cars.service';
       {
         path: 'cars',
         component: CarsComponent
+      },
+      {
+        path: 'entregas',
+        component: EntregasComponent
       }
     ])
   ],
-  providers: [CarService],
+  providers: [CarService,EntregaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

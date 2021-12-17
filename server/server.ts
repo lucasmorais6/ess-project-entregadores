@@ -3,7 +3,8 @@ import bodyParser = require("body-parser");
 
 import { CarService } from './src/cars-service';
 import { Car } from './src/car';
-
+import { EntregaService } from './src/entregas-service';
+import { Entrega } from './src/entrega';
 var app = express();
 
 var allowCrossDomain = function(req: any, res: any, next: any) {
@@ -18,18 +19,25 @@ app.use(bodyParser.json());
 
 var carService: CarService = new CarService();
 
+var entregaService: EntregaService = new EntregaService();
+
 app.get('/cars', function(req, res){
   const cars = carService.get();
   res.send(JSON.stringify(cars));
 });
 
-app.get('/cars/:id', function(req, res){
+app.get('/entregas', function(req, res){
+  const entregas = entregaService.get();
+  res.send(JSON.stringify(entregas));
+});
+
+app.get('/entregas/:id', function(req, res){
   const id = req.params.id;
-  const car = carService.getById(id);
-  if (car) {
-    res.send(car);
+  const entrega = entregaService.getById(id);
+  if (entrega) {
+    res.send(entrega);
   } else {
-    res.status(404).send({ message: `Car ${id} could not be found`});
+    res.status(404).send({ message: `Entrega ${id} could not be found`});
   }
 });
 
@@ -48,6 +56,21 @@ app.post('/cars', function(req: express.Request, res: express.Response){
   }
 });
 
+app.post('/entregas', function(req: express.Request, res: express.Response){
+  const entrega: Entrega = <Entrega> req.body;
+  try {
+    const result = entregaService.add(entrega);
+    if (result) {
+      res.status(201).send(result);
+    } else {
+      res.status(403).send({ message: "Entrega list is full"});
+    }
+  } catch (err) {
+    const {message} = err;
+    res.status(400).send({ message })
+  }
+});
+
 app.put('/cars', function (req: express.Request, res: express.Response) {
   const car: Car = <Car> req.body;
   const result = carService.update(car);
@@ -55,6 +78,16 @@ app.put('/cars', function (req: express.Request, res: express.Response) {
     res.send(result);
   } else {
     res.status(404).send({ message: `Car ${car.id} could not be found.`});
+  }
+})
+
+app.put('/entregas', function (req: express.Request, res: express.Response) {
+  const entrega: Entrega = <Entrega> req.body;
+  const result = entregaService.update(entrega);
+  if (result) {
+    res.send(result);
+  } else {
+    res.status(404).send({ message: `Entrega ${entrega.id} could not be found.`});
   }
 })
 

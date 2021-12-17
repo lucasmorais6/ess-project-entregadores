@@ -1,0 +1,16 @@
+<table>
+<tr *ngIf="entregas.length > 0">
+   <th>Restaurante</th>
+   <th>Endereço de entrega</th>
+   <th>Tempo de preparo</th>
+   <th>Lucro</th>
+   <th>Aceitar solicitação</th>
+</tr>
+<tr *ngFor="let entrega of entregas">
+   <td id="entrega-{{entrega.restaurante}}-{{entrega.endereco}}-{{entrega.tempo_preparo}}-{{entrega.lucro}}">{{entrega.restaurante}}</td>
+   <td>{{entrega.endereco}}</td>
+   <td>{{entrega.tempo_preparo}}</td>
+   <td>{{entrega.lucro}}</td>
+   <td>Clicar aqui</td>
+</tr>
+</table>
