@@ -4,7 +4,7 @@ import bodyParser = require("body-parser");
 import { CarService } from './src/cars-service';
 import { Car } from './src/car';
 import { EntregaService } from './src/entregas-service';
-import { Entrega } from './src/entrega';
+import { Entrega } from '../common/entrega';
 var app = express();
 
 var allowCrossDomain = function(req: any, res: any, next: any) {
@@ -45,7 +45,6 @@ app.get('/entregas/:id', function(req, res){
 app.get('/entregas/entregador/:id', function(req, res){
   const id = req.params.id;
   const entregas = entregaService.getByEntregadorId(id);
-  console.log("eee")
   if (entregas) {
     res.send(entregas);
   } else {

@@ -1,5 +1,6 @@
 
 <div><h2>Entregas ativas</h2></div>
+<h4 *ngIf="is_ativas_empty()">Você não tem nenhuma entrega finalizada!</h4>
 <table>
    <tr *ngIf="!is_ativas_empty()">
       <th>Restaurante</th>
@@ -9,7 +10,6 @@
       <th>Finalizar entrega</th>
    </tr>
    <tr *ngFor="let entrega of entregas">
-
       
          <td *ngIf="entrega.is_ativa" id="entrega-{{entrega.restaurante}}-{{entrega.endereco}}-{{entrega.tempo_preparo}}-{{entrega.lucro}}">{{entrega.restaurante}}</td>
          <td *ngIf="entrega.is_ativa">{{entrega.endereco}}</td>

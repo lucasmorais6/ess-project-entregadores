@@ -1,4 +1,4 @@
-import { Entrega } from "./entrega";
+import { Entrega } from "../../common/entrega";
 
 export class EntregaService {
   entregas: Entrega[] = [];
@@ -6,9 +6,9 @@ export class EntregaService {
   
   add(entrega: Entrega): Entrega {
     //if (this.entregas.length >= 10) return null;
-    const newEntrega = new Entrega(<Entrega> { id: this.idCount, ...entrega });
+    var newEntrega = <Entrega>{id: this.idCount, ...entrega}
     if (newEntrega.lucro <= 0) {
-      throw Error("Price can't equal or less than zero")
+      throw Error("Lucro can't equal or less than zero")
     }
     this.entregas.push(newEntrega);
     this.idCount++;

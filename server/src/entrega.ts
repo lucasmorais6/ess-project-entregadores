@@ -13,13 +13,4 @@ export class Entrega {
       this.endereco = entrega.endereco;
       this.lucro = entrega.lucro;
     }
-  
-    update(entrega: Entrega): void {
-      this.restaurante = entrega.restaurante;
-      this.endereco = entrega.endereco;
-      this.tempo_preparo = entrega.tempo_preparo;
-      this.lucro = entrega.lucro;
-      this.entregador_id = entrega.entregador_id;
-      this.is_ativa = entrega.is_ativa;
-    }
 }
