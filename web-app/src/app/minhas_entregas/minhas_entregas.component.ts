@@ -25,7 +25,6 @@ export class MinhasEntregasComponent implements OnInit {
 
    finalizarEntrega(e: Entrega): void {
       e.is_ativa = false
-      //this.entregas = this.entregas.filter(({ id }) => e.id != id );
       this.entregaService.update(e)
       .then(result => {
             if (result) {

@@ -21,10 +21,6 @@ var carService: CarService = new CarService();
 
 var entregaService: EntregaService = new EntregaService();
 
-app.get('/cars', function(req, res){
-  const cars = carService.get();
-  res.send(JSON.stringify(cars));
-});
 
 app.get('/entregas', function(req, res){
   const entregas = entregaService.get();
@@ -57,21 +53,6 @@ app.get('/entregas/entregador/:id', function(req, res){
   }
 });
 
-app.post('/cars', function(req: express.Request, res: express.Response){
-  const car: Car = <Car> req.body;
-  try {
-    const result = carService.add(car);
-    if (result) {
-      res.status(201).send(result);
-    } else {
-      res.status(403).send({ message: "Car list is full"});
-    }
-  } catch (err) {
-    const {message} = err;
-    res.status(400).send({ message })
-  }
-});
-
 app.post('/entregas', function(req: express.Request, res: express.Response){
   const entrega: Entrega = <Entrega> req.body;
   try {
@@ -86,16 +67,6 @@ app.post('/entregas', function(req: express.Request, res: express.Response){
     res.status(400).send({ message })
   }
 });
-
-app.put('/cars', function (req: express.Request, res: express.Response) {
-  const car: Car = <Car> req.body;
-  const result = carService.update(car);
-  if (result) {
-    res.send(result);
-  } else {
-    res.status(404).send({ message: `Car ${car.id} could not be found.`});
-  }
-})
 
 app.put('/entregas', function (req: express.Request, res: express.Response) {
   const entrega: Entrega = <Entrega> req.body;
