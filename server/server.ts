@@ -20,7 +20,7 @@ servidor.use(express.json());
 servidor.use(express.urlencoded({ extended: true}));
 
 let usuarios: Usuario[] = [];
-const usuario_sessao = null;
+let usuario_sessao:Usuario = null;
 
 servidor.post('/usuarios/cadastrar', (req: express.Request, res: express.Response) => {
     let cpf = req.body.cpf;
