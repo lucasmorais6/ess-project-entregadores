@@ -16,6 +16,11 @@ export class MinhasEntregasComponent implements OnInit {
    entrega: Entrega = new Entrega();
    entregas: Entrega[] = [];
 
+   getLucro(): string {
+      let lucro = this.entregas.filter(({is_ativa}) => !is_ativa).reduce(function (acc, obj) { return acc + obj.lucro; }, 0);
+      return lucro.toFixed(2)
+   }
+
    is_ativas_empty(): boolean {
       return this.entregas.filter(({is_ativa}) => is_ativa).length == 0;
    }
