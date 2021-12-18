@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
 
-import { Entrega } from './entrega';
+import { Entrega } from '../../../../common/entrega';
 import { EntregaService } from './entregas_disponiveis.service';
 
 @Component({

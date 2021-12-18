@@ -1,7 +1,7 @@
 import { Injectable }    from '@angular/core';
 import { Http, Headers } from '@angular/http';
 
-import { Entrega } from './entrega';
+import { Entrega } from '../../../../common/entrega';
 
 @Injectable()
 export class MinhasEntregasService {
