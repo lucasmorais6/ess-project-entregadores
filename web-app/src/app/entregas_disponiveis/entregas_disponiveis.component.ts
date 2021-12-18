@@ -13,19 +13,7 @@ export class EntregasComponent implements OnInit {
    constructor(private entregaService: EntregaService) {}
    
    private user_id: number = 1;
-   entrega: Entrega = new Entrega();
    entregas: Entrega[] = [];
-
-   createEntrega(e: Entrega): void {
-      this.entregaService.create(e)
-      .then(result => {
-            if (result) {
-               this.entregas.push(<Entrega> result);
-               this.entrega = new Entrega();
-            }
-         })
-         .catch(erro => alert(erro));
-   }
 
    aceitarEntrega(e: Entrega): void {
       e.entregador_id = this.user_id;

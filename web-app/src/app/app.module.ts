@@ -11,12 +11,15 @@ import { EntregasComponent } from './entregas_disponiveis/entregas_disponiveis.c
 import { EntregaService } from './entregas_disponiveis/entregas_disponiveis.service';
 import { MinhasEntregasComponent } from './minhas_entregas/minhas_entregas.component';
 import { MinhasEntregasService } from './minhas_entregas/minhas_entregas.service';
+import { RegistrarEntregaComponent } from './registrar_entrega/registrar_entrega.component';
+import { RegistrarEntregaService } from './registrar_entrega/registrar_entrega.service';
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     EntregasComponent,
-    MinhasEntregasComponent
+    MinhasEntregasComponent,
+    RegistrarEntregaComponent
   ],
   imports: [
     BrowserModule,
@@ -31,10 +34,14 @@ import { MinhasEntregasService } from './minhas_entregas/minhas_entregas.service
       {
         path: 'minhas_entregas',
         component: MinhasEntregasComponent
+      },
+      {
+        path: 'registrar_entrega',
+        component: RegistrarEntregaComponent
       }
     ])
   ],
-  providers: [EntregaService, MinhasEntregasService],
+  providers: [EntregaService, MinhasEntregasService, RegistrarEntregaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
