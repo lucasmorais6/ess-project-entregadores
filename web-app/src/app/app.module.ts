@@ -6,15 +6,21 @@ import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+import { LoginComponent } from './login/login.component';
+import { LoginService } from './login/login.service';
+
+import { CadastroComponent } from './cadastro/cadastro.component';
+import { CadastroService } from './cadastro/cadastro.service';
+
 import { NavbarComponent } from './navbar/navbar.component';
-import { CarsComponent } from './cars/cars.component';
-import { CarService } from './cars/cars.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    CarsComponent
+    CadastroComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -23,12 +29,18 @@ import { CarService } from './cars/cars.service';
     HttpModule,
     RouterModule.forRoot([
       {
-        path: 'cars',
-        component: CarsComponent
-      }
-    ])
+        path: 'cadastro',
+        component: CadastroComponent
+      },
+    ]),
+    RouterModule.forRoot([
+      {
+        path: 'login',
+        component: LoginComponent
+      },
+    ]),
   ],
-  providers: [CarService],
+  providers: [CadastroService, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
