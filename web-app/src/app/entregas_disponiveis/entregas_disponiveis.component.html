@@ -1,3 +1,4 @@
+<h2 *ngIf='entregas.length === 0'>Nenhuma entrega disponível no momento.</h2>
 <table>
 <tr *ngIf="entregas.length > 0">
    <th>Restaurante</th>
@@ -11,6 +12,8 @@
    <td>{{entrega.endereco}}</td>
    <td>{{entrega.tempo_preparo}}</td>
    <td>{{entrega.lucro}}</td>
-   <td>Clicar aqui</td>
+   <td>
+      <button id="aceitar_entrega" (click)="aceitarEntrega(entrega)">Adicionar</button>
+   </td>
 </tr>
 </table>

@@ -4,7 +4,8 @@ export class Entrega {
     tempo_preparo: number;
     endereco: string;
     lucro: number;
-  
+    entregador_id: number = null;
+    is_ativa: boolean = false;
     constructor(entrega: Entrega) {
       this.id = entrega.id;
       this.restaurante = entrega.restaurante;
@@ -18,5 +19,7 @@ export class Entrega {
       this.endereco = entrega.endereco;
       this.tempo_preparo = entrega.tempo_preparo;
       this.lucro = entrega.lucro;
+      this.entregador_id = entrega.entregador_id;
+      this.is_ativa = entrega.is_ativa;
     }
 }

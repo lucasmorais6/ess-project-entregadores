@@ -1,0 +1,62 @@
+
+<div><h2>Entregas ativas</h2></div>
+<table>
+   <tr *ngIf="!is_ativas_empty()">
+      <th>Restaurante</th>
+      <th>Endereço de entrega</th>
+      <th>Tempo de preparo</th>
+      <th>Lucro</th>
+      <th>Finalizar entrega</th>
+   </tr>
+   <tr *ngFor="let entrega of entregas">
+
+      
+         <td *ngIf="entrega.is_ativa" id="entrega-{{entrega.restaurante}}-{{entrega.endereco}}-{{entrega.tempo_preparo}}-{{entrega.lucro}}">{{entrega.restaurante}}</td>
+         <td *ngIf="entrega.is_ativa">{{entrega.endereco}}</td>
+         <td *ngIf="entrega.is_ativa">{{entrega.tempo_preparo}}</td>
+         <td *ngIf="entrega.is_ativa">{{entrega.lucro}}</td>
+         <td *ngIf="entrega.is_ativa">
+            <button id="finalizar_entrega" (click)="finalizarEntrega(entrega)">Finalizar</button>
+         </td>
+      
+   </tr>
+</table>
+<div><h2>Entregas finalizadas</h2></div>
+<h4 *ngIf="is_finalizadas_empty()">Você não tem nenhuma entrega finalizada!</h4>
+<table>
+   <tr *ngIf="!is_finalizadas_empty()">
+      <th>Restaurante</th>
+      <th>Endereço de entrega</th>
+      <th>Tempo de preparo</th>
+      <th>Lucro</th>
+   </tr>
+   <tr *ngFor="let entrega of entregas">
+         <td *ngIf="!entrega.is_ativa" id="entrega-{{entrega.restaurante}}-{{entrega.endereco}}-{{entrega.tempo_preparo}}-{{entrega.lucro}}">{{entrega.restaurante}}</td>
+         <td *ngIf="!entrega.is_ativa">{{entrega.endereco}}</td>
+         <td *ngIf="!entrega.is_ativa">{{entrega.tempo_preparo}}</td>
+         <td *ngIf="!entrega.is_ativa">{{entrega.lucro}}</td>
+</tr>
+</table>
+
+<table>
+   <tr>
+      <td><label>Restaurante </label></td>
+      <td><input id="entrega-restaurante-input" [(ngModel)]="entrega.restaurante" ></td>
+   </tr>
+   <tr>
+      <td><label>Endereço </label></td>
+      <td><input id="entrega-endereco-input" [(ngModel)]="entrega.endereco" ></td>
+   </tr>
+   <tr>
+      <td><label>Lucro </label></td>
+      <td><input id="entrega-lucro-input" type="number" [(ngModel)]="entrega.lucro" ></td>
+   </tr>
+   <tr>
+      <td><label>Tempo de Preparo </label></td>
+      <td><input id="entrega-tempo_preparo-input" type="number" [(ngModel)]="entrega.tempo_preparo" ></td>
+   </tr>
+   <tr>
+      <td><button id="register-entrega" (click)="createEntrega(entrega)">Adicionar</button></td>
+   </tr>
+</table>
+   

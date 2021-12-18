@@ -31,6 +31,11 @@ app.get('/entregas', function(req, res){
   res.send(JSON.stringify(entregas));
 });
 
+app.get('/entregas/disponiveis', function(req, res){
+  const entregas = entregaService.getByEntregadorIdNull();
+  res.send(JSON.stringify(entregas));
+});
+
 app.get('/entregas/:id', function(req, res){
   const id = req.params.id;
   const entrega = entregaService.getById(id);
@@ -38,6 +43,17 @@ app.get('/entregas/:id', function(req, res){
     res.send(entrega);
   } else {
     res.status(404).send({ message: `Entrega ${id} could not be found`});
+  }
+});
+
+app.get('/entregas/entregador/:id', function(req, res){
+  const id = req.params.id;
+  const entregas = entregaService.getByEntregadorId(id);
+  console.log("eee")
+  if (entregas) {
+    res.send(entregas);
+  } else {
+    res.status(404).send({ message: `Entregas from entregador ${id} could not be found`});
   }
 });
 

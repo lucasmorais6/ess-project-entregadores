@@ -7,16 +7,16 @@ import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { CarsComponent } from './cars/cars.component';
-import { CarService } from './cars/cars.service';
-import { EntregasComponent } from './entregas/entregas.component';
-import { EntregaService } from './entregas/entregas.service';
+import { EntregasComponent } from './entregas_disponiveis/entregas_disponiveis.component';
+import { EntregaService } from './entregas_disponiveis/entregas_disponiveis.service';
+import { MinhasEntregasComponent } from './minhas_entregas/minhas_entregas.component';
+import { MinhasEntregasService } from './minhas_entregas/minhas_entregas.service';
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    CarsComponent,
-    EntregasComponent
+    EntregasComponent,
+    MinhasEntregasComponent
   ],
   imports: [
     BrowserModule,
@@ -25,16 +25,16 @@ import { EntregaService } from './entregas/entregas.service';
     HttpModule,
     RouterModule.forRoot([
       {
-        path: 'cars',
-        component: CarsComponent
+        path: 'entregas_disponiveis',
+        component: EntregasComponent
       },
       {
-        path: 'entregas',
-        component: EntregasComponent
+        path: 'minhas_entregas',
+        component: MinhasEntregasComponent
       }
     ])
   ],
-  providers: [CarService,EntregaService],
+  providers: [EntregaService, MinhasEntregasService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

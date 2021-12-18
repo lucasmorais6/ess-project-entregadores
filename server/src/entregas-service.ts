@@ -5,7 +5,7 @@ export class EntregaService {
   idCount: number = 0;
   
   add(entrega: Entrega): Entrega {
-    if (this.entregas.length >= 10) return null;
+    //if (this.entregas.length >= 10) return null;
     const newEntrega = new Entrega(<Entrega> { id: this.idCount, ...entrega });
     if (newEntrega.lucro <= 0) {
       throw Error("Price can't equal or less than zero")
@@ -29,4 +29,13 @@ export class EntregaService {
   getById(entregaId: number) : Entrega {
     return this.entregas.find(({ id }) => id == entregaId);
   }
+
+  getByEntregadorId(id: number) : Entrega[] {
+    return this.entregas.filter(({ entregador_id }) => entregador_id == id)
+  }
+
+  getByEntregadorIdNull() : Entrega[] {
+    return this.entregas.filter(({ entregador_id }) => entregador_id == null)
+  }
+
 }
