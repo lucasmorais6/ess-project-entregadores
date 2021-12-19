@@ -9,12 +9,12 @@ function sleep(ms) {
 
 defineSupportCode(function ({ Given, When, Then }) {
     Given(/^I'm on the page "([^\"]*)"$/, async (name) => {
-        await browser.get("http://localhost:4200/cars");
+        await browser.get("http://localhost:4200/entregas_disponiveis");
         await expect(browser.getTitle()).to.eventually.equal(name);
     })
 
     Given(/^the "([^\"]*)" "([^\"]*)" from "([^\"]*)", costing "(\d*)" doesn't appear on the list$/, async (color, name, brand, price) => {
-        expect((await element.all(by.id(`car-${name}-${brand}-${price}-${color}`))).length).to.equal(0);
+        expect((await element.all(by.id(`entrega-${name}-${brand}-${price}-${color}`))).length).to.equal(0);
     })
 
     When(/^I fill the name fild with "([^\"]*)", the brand with "([^\"]*)", the price with "(\d*)", the color with "([^\"]*)"$/, 
@@ -35,6 +35,6 @@ defineSupportCode(function ({ Given, When, Then }) {
     })
 
     Then(/^the "([^\"]*)" "([^\"]*)" from "([^\"]*)", costing "(\d*)" appears on the list$/, async (color, name, brand, price) => {
-        expect((await element.all(by.id(`car-${name}-${brand}-${price}-${color}`))).length).to.equal(1);
+        expect((await element.all(by.id(`entrega-${name}-${brand}-${price}-${color}`))).length).to.equal(1);
     })
 })

@@ -14,7 +14,7 @@ export let config: Config = {
     frameworkPath: require.resolve('protractor-cucumber-framework'),
 
     specs: [
-        '../../features/*.feature'
+        '../../features/notificacao.feature'
     ],
 
     onPrepare: () => {

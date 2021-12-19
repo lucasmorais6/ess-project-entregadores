@@ -5,10 +5,13 @@ export class EntregaService {
   idCount: number = 0;
   
   add(entrega: Entrega): Entrega {
-    //if (this.entregas.length >= 10) return null;
+    console.log("sasasasa")
     var newEntrega = <Entrega>{id: this.idCount, ...entrega}
     if (newEntrega.lucro <= 0) {
-      throw Error("Lucro can't equal or less than zero")
+      throw Error("Lucro tem que ser um valor positivo maior que zero")
+    }
+    if (newEntrega.tempo_preparo < 0) {
+      throw Error("Tempo de preparo não pode ser menor que zero")
     }
     this.entregas.push(newEntrega);
     this.idCount++;
@@ -16,7 +19,6 @@ export class EntregaService {
   }
 
   update(entrega: Entrega) : Entrega {
-    console.log(this.entregas)
     var result : Entrega = this.entregas.find(e => e.id == entrega.id);
     if (result) result.update(entrega);
     return result;

@@ -1,8 +1,6 @@
 import express = require('express');
 import bodyParser = require("body-parser");
 
-import { CarService } from './src/cars-service';
-import { Car } from './src/car';
 import { EntregaService } from './src/entregas-service';
 import { Entrega } from '../common/entrega';
 var app = express();
@@ -16,8 +14,6 @@ var allowCrossDomain = function(req: any, res: any, next: any) {
 app.use(allowCrossDomain);
 
 app.use(bodyParser.json());
-
-var carService: CarService = new CarService();
 
 var entregaService: EntregaService = new EntregaService();
 
@@ -34,7 +30,7 @@ app.get('/entregas/disponiveis', function(req, res){
 
 app.get('/entregas/:id', function(req, res){
   const id = req.params.id;
-  const entrega = entregaService.getById(id);
+  const entrega = entregaService.getById(Number(id));
   if (entrega) {
     res.send(entrega);
   } else {
@@ -44,7 +40,7 @@ app.get('/entregas/:id', function(req, res){
 
 app.get('/entregas/entregador/:id', function(req, res){
   const id = req.params.id;
-  const entregas = entregaService.getByEntregadorId(id);
+  const entregas = entregaService.getByEntregadorId(Number(id));
   if (entregas) {
     res.send(entregas);
   } else {
@@ -78,7 +74,7 @@ app.put('/entregas', function (req: express.Request, res: express.Response) {
 })
 
 var server = app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
+  console.log('Entregadorezzs app listening on port 3000!');
 })
 
 function closeServer(): void {
