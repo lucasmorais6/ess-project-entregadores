@@ -1,19 +1,21 @@
-<h2 *ngIf='entregas.length === 0'>Nenhuma entrega disponível no momento.</h2>
-<table>
-<tr *ngIf="entregas.length > 0">
-   <th>Restaurante</th>
-   <th>Endereço de entrega</th>
-   <th>Tempo de preparo</th>
-   <th>Lucro</th>
-   <th>Aceitar solicitação</th>
-</tr>
-<tr *ngFor="let entrega of entregas" name="entregas_list">
-   <td name="restaurante_list" id="entrega-{{entrega.restaurante}}-{{entrega.endereco}}-{{entrega.lucro}}-{{entrega.tempo_preparo}}-{{entrega.id}}">{{entrega.restaurante}}</td>
-   <td name="endereco_list">{{entrega.endereco}}</td>
-   <td name="tempo_preparo_list">{{entrega.tempo_preparo}}</td>
-   <td name="lucro_list">{{entrega.lucro}}</td>
-   <td>
-      <button id="aceitar_entrega-{{entrega.id}}" (click)="aceitarEntrega(entrega)">Adicionar</button>
-   </td>
-</tr>
-</table>
+<section class="entregasView">
+   <h2 *ngIf='entregas.length === 0' class="disponivelText">Nenhuma entrega disponível no momento.</h2>
+   <table>
+   <tr *ngIf="entregas.length > 0">
+      <th>Restaurante</th>
+      <th>Endereço de entrega</th>
+      <th>Tempo de preparo</th>
+      <th>Lucro</th>
+      <th>Aceitar solicitação</th>
+   </tr>
+   <tr *ngFor="let entrega of entregas" name="entregas_list">
+      <td name="restaurante_list" id="entrega-{{entrega.restaurante}}-{{entrega.endereco}}-{{entrega.lucro}}-{{entrega.tempo_preparo}}-{{entrega.id}}">{{entrega.restaurante}}</td>
+      <td name="endereco_list">{{entrega.endereco}}</td>
+      <td name="tempo_preparo_list">{{entrega.tempo_preparo}}</td>
+      <td name="lucro_list">{{entrega.lucro}}</td>
+      <td>
+         <button id="aceitar_entrega-{{entrega.id}}" (click)="aceitarEntrega(entrega)">Aceitar</button>
+      </td>
+   </tr>
+   </table>
+</section>

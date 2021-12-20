@@ -1,20 +1,20 @@
 import { Injectable }    from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Entrega } from '../../../../common/entrega';
 
 @Injectable()
 export class EntregaService {
-  private headers = new Headers({'Content-Type': 'application/json'});
+  private headers = new HttpHeaders({'Content-Type': 'application/json'});
   private taURL = 'http://localhost:3000';
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   update(entrega: Entrega): Promise<Entrega> {
     return this.http.put(this.taURL + "/entregas",JSON.stringify(entrega), {headers: this.headers})
       .toPromise()
       .then(res => {
-        if (res.status === 201) {return entrega;} else {return null;}
+        return res
       })
       .catch(this.catch);
   }
@@ -22,7 +22,9 @@ export class EntregaService {
   getEntregas(): Promise<Entrega[]> {
     let entregas = this.http.get(this.taURL + "/entregas/disponiveis")
     .toPromise()
-    .then(res => res.json() as Entrega[])
+    .then(res => {
+      return res
+    })
     .catch(this.catch);
     return entregas;
   }

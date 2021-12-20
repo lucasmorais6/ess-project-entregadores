@@ -67,7 +67,6 @@ describe("O servico de entregas", () => {
       "tempo_preparo": 30
     };
     let result = service.update(sample);
-
     expect(service.entregas.length).toBe(3);
     expect(result.id).toBe(0);
     expect(result.restaurante).toBe(sample.restaurante);

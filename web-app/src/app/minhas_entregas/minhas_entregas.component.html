@@ -1,44 +1,43 @@
-
-<div><h2>Entregas ativas</h2></div>
-<h4 *ngIf="is_ativas_empty()">Você não tem nenhuma entrega finalizada!</h4>
-<table>
-   <tr *ngIf="!is_ativas_empty()">
-      <th>Restaurante</th>
-      <th>Endereço de entrega</th>
-      <th>Tempo de preparo</th>
-      <th>Lucro</th>
-      <th>Finalizar entrega</th>
+<section class="entregasView">
+   <div><h2>Entregas ativas</h2></div>
+   <h4 *ngIf="is_ativas_empty()">Você não tem nenhuma entrega finalizada!</h4>
+   <table>
+      <tr *ngIf="!is_ativas_empty()">
+         <th>Restaurante</th>
+         <th>Endereço de entrega</th>
+         <th>Tempo de preparo</th>
+         <th>Lucro</th>
+         <th>Finalizar entrega</th>
+      </tr>
+      <tr *ngFor="let entrega of entregas">
+         
+            <td *ngIf="entrega.is_ativa" id="entrega_ativa-{{entrega.restaurante}}-{{entrega.id}}">{{entrega.restaurante}}</td>
+            <td *ngIf="entrega.is_ativa">{{entrega.endereco}}</td>
+            <td *ngIf="entrega.is_ativa">{{entrega.tempo_preparo}}</td>
+            <td *ngIf="entrega.is_ativa" id="entrega_ativa_lucro-{{entrega.restaurante}}-{{entrega.id}}-{{entrega.lucro}}">{{entrega.lucro}}</td>
+            <td *ngIf="entrega.is_ativa">
+               <button id="finalizar_entrega-{{entrega.id}}" (click)="finalizarEntrega(entrega)">Finalizar</button>
+            </td>
+         
+      </tr>
+   </table>
+   <div><h2>Entregas finalizadas</h2></div>
+   <h4 *ngIf="is_finalizadas_empty()">Você não tem nenhuma entrega finalizada!</h4>
+   <table>
+      <tr *ngIf="!is_finalizadas_empty()">
+         <th>Restaurante</th>
+         <th>Endereço de entrega</th>
+         <th>Tempo de preparo</th>
+         <th>Lucro</th>
+      </tr>
+      <tr *ngFor="let entrega of entregas">
+            <td *ngIf="!entrega.is_ativa" id="entrega_finalizada-{{entrega.restaurante}}-{{entrega.id}}">{{entrega.restaurante}}</td>
+            <td *ngIf="!entrega.is_ativa">{{entrega.endereco}}</td>
+            <td *ngIf="!entrega.is_ativa" id="item_finalizado">{{entrega.tempo_preparo}}</td>
+            <td *ngIf="!entrega.is_ativa" id="entrega_finalizada_lucro-{{entrega.restaurante}}-{{entrega.id}}-{{entrega.lucro}}">{{entrega.lucro}}</td>
    </tr>
-   <tr *ngFor="let entrega of entregas">
-      
-         <td *ngIf="entrega.is_ativa" id="entrega_ativa-{{entrega.restaurante}}-{{entrega.id}}">{{entrega.restaurante}}</td>
-         <td *ngIf="entrega.is_ativa">{{entrega.endereco}}</td>
-         <td *ngIf="entrega.is_ativa">{{entrega.tempo_preparo}}</td>
-         <td *ngIf="entrega.is_ativa" id="entrega_ativa_lucro-{{entrega.restaurante}}-{{entrega.id}}-{{entrega.lucro}}">{{entrega.lucro}}</td>
-         <td *ngIf="entrega.is_ativa">
-            <button id="finalizar_entrega-{{entrega.id}}" (click)="finalizarEntrega(entrega)">Finalizar</button>
-         </td>
-      
-   </tr>
-</table>
-<div><h2>Entregas finalizadas</h2></div>
-<h4 *ngIf="is_finalizadas_empty()">Você não tem nenhuma entrega finalizada!</h4>
-<table>
-   <tr *ngIf="!is_finalizadas_empty()">
-      <th>Restaurante</th>
-      <th>Endereço de entrega</th>
-      <th>Tempo de preparo</th>
-      <th>Lucro</th>
-   </tr>
-   <tr *ngFor="let entrega of entregas">
-         <td *ngIf="!entrega.is_ativa" id="entrega_finalizada-{{entrega.restaurante}}-{{entrega.id}}">{{entrega.restaurante}}</td>
-         <td *ngIf="!entrega.is_ativa">{{entrega.endereco}}</td>
-         <td *ngIf="!entrega.is_ativa" id="item_finalizado">{{entrega.tempo_preparo}}</td>
-         <td *ngIf="!entrega.is_ativa" id="entrega_finalizada_lucro-{{entrega.restaurante}}-{{entrega.id}}-{{entrega.lucro}}">{{entrega.lucro}}</td>
-</tr>
-</table>
+   </table>
 
-<div><h2>Lucro total</h2></div>
-<label id="lucro-{{getLucro()}}">Você obteve um lucro total de R${{getLucro()}}!</label>
-
-   
+   <div><h2>Lucro total</h2></div>
+   <label id="lucro-{{getLucro()}}">Você obteve um lucro total de R${{getLucro()}}!</label>
+</section>
