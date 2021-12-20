@@ -16,6 +16,7 @@ import { CadastroComponent } from './cadastro/cadastro.component';
 import { CadastroService } from './cadastro/cadastro.service';
 
 import { NavbarComponent } from './navbar/navbar.component';
+
 import { EntregasComponent } from './entregas_disponiveis/entregas_disponiveis.component';
 import { EntregaService } from './entregas_disponiveis/entregas_disponiveis.service';
 import { MinhasEntregasComponent } from './minhas_entregas/minhas_entregas.component';
