@@ -27,8 +27,8 @@ servidor.post('/usuarios/cadastrar', (req: express.Request, res: express.Respons
     let nome = req.body.nome;
     let email = req.body.email;
     let senha = req.body.senha;
-//AQUI
     let usuario;
+ 
     if(req.body.hasOwnProperty('mascara')){
         usuario = new Entregador(cpf, nome, email, senha);
     }
@@ -57,15 +57,10 @@ servidor.post('/usuarios/cadastrar', (req: express.Request, res: express.Respons
             })
         }
         else{
-            // console.log(usuarios);
-            usuarios.push(usuario);
-            // console.log(usuarios);
-
             res.send({
                 success: 'Usuario cadastrado com sucesso!',
             })
         }
-        console.log(usuarios);
     }
 })
 
@@ -107,7 +102,6 @@ servidor.post('/login', (req: express.Request, res: express.Response) => {
             })
         }
     }    
-    console.log(usuario_sessao);
 })
 
 servidor.post('/atualiza_cadastro', (req: express.Request, res: express.Response) => {
@@ -162,8 +156,6 @@ servidor.post('/atualiza_cadastro', (req: express.Request, res: express.Response
                     success: 'Atualizacao realizada com sucesso!',
                 })
             }
-            console.log(usuarios);
-            console.log(usuario_sessao);
         }
     }
     else{
@@ -184,8 +176,6 @@ servidor.post('/desloga', (req: express.Request, res: express.Response) => {
     res.send({
         success: 'Usuario deslogado do sistema com sucesso!',
     })
-    
-    console.log(usuario_sessao);
 })
 
 var server = servidor.listen(3000, function () {

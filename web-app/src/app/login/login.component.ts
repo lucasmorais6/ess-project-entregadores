@@ -37,13 +37,10 @@ export class LoginComponent {
                     this.router.navigateByUrl('/minha_conta');
                     //this.controla_notificacao(true, true, status);
                 } else if(status === 'E-mail ou senha incorretos!') {
-                    console.log(status);
                     this.controla_notificacao(true, false, status);
                 } else if(status === 'E-mail ou senha nulos!'){
-                    console.log(status)
                     this.controla_notificacao(true, false, status);
                 } else {
-                    console.log("Erro ao realizar o login!");
                     this.controla_notificacao(true, false, status);
                 }
             },

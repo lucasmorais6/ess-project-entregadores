@@ -26,12 +26,8 @@ defineSupportCode(function ({ Given, When, Then }) {
       await $("a[name='login']").click();
     });
 
-    Given(/^seja selecionada a opção de cadastro de aluno$/, {timeout: 100 * 1000}, async () => {
-      await element(by.id('aluno')).click();
-    });
-
-    Given(/^seja selecionada a opção de cadastro de professor$/, {timeout: 100 * 1000}, async () => {
-      await element(by.id('prof_monitor')).click();
+    Given(/^seja selecionada a opção de cadastro de entregador$/, {timeout: 100 * 1000}, async () => {
+      await element(by.id('entregador')).click();
     });
 
     Given('exista um usuário cadastrado com o CPF {stringInDoubleQuotes}', {timeout: 100 * 1000}, async (cpf) => {

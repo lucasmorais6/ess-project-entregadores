@@ -39,19 +39,14 @@ export class CadastroComponent {
                     this.cadastroService.getUsuarios().subscribe(
                         all_users => { 
                         this.usuarios = all_users; 
-                        console.log(this.usuarios);
-                        console.log(status);
                         },
                     );
                     this.controla_notificacao(true, true, status);
                 } else if(status === 'Um usuario com esse CPF ou esse EMAIL ja existe na base de dados!') {
-                    console.log(status);
                     this.controla_notificacao(true, false, status);
                 } else if(status === 'Alguma das entradas esta nula!'){
-                    console.log(status)
                     this.controla_notificacao(true, false, status);
                 } else {
-                    console.log("Erro ao cadastrar o novo usuario!");
                     this.controla_notificacao(true, false, status);
                 }
             },
