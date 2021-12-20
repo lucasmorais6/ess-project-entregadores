@@ -30,13 +30,9 @@ export class CadastroComponent {
         }
     }
 
-    cadastrarUsuario(cpf: string, nome: string, email: string, senha:string, prof_monitor:boolean, entregador:boolean): void{
+    cadastrarUsuario(cpf: string, nome: string, email: string, senha:string): void{
     
-        let eh_entregador = false;
-        if(entregador){
-            eh_entregador = true;
-        }
-
+        let eh_entregador = true;
         this.cadastroService.cadastrar(cpf, nome, email, senha, eh_entregador).subscribe(
             (status) => {
                 if (status === "Usuario cadastrado com sucesso!") {
