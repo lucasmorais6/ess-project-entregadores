@@ -1,6 +1,7 @@
 import 'jasmine';
 import request = require("request-promise");
 import { closeServer } from '../server';
+import { Entrega } from '../../common/entrega';
 
 const baseUrl = "http://localhost:3000";
 const entregasUrl = `${baseUrl}/entregas`
@@ -50,10 +51,25 @@ describe("O servidor", () => {
       "tempo_preparo": 45
     }
     const options :any = {method: 'POST', uri: (entregasUrl), body, json: true};
-    const newCar = { id: 0, ...body };
+    const newEntrega = { id: 0, ...body };
     return request(options).then(body => {
-         expect(body).toEqual(newCar);
+         expect(body).toEqual(newEntrega);
      });
   });
 
+  it("Atualiza uma entrega", () => {
+
+    const newEntrega = <Entrega> {
+      "id": 0,
+      "restaurante": "Mc Falso",
+      "endereco": "Rua Padre Roma, 200",
+      "lucro": 20,
+      "tempo_preparo": 40
+    }
+    const options :any = {method: 'PUT', uri: (entregasUrl), newEntrega, json: true};
+    
+    return request(options).then(body => {
+      expect(body).toEqual(newEntrega);
+     });
+  });
 })

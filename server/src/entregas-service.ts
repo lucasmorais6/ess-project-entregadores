@@ -21,9 +21,9 @@ export class EntregaService {
     var result : Entrega = this.entregas.find(e => e.id == entrega.id);
     console.log(result);
 
-    //isso aqui fere o conceito de possuir uma solid architecture mas
-    //precisei deixar assim pois começou a ter problema com a função update de entrega
-    //e não consegui resolver
+    // isso aqui fere o conceito de possuir uma solid architecture mas
+    // precisei deixar assim pois começou a ter problema com a função update de entrega
+    // e não consegui resolver
     result.id = entrega.id;
     result.endereco = entrega.endereco;
     result.entregador_id = entrega.entregador_id;
