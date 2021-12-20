@@ -1,30 +1,23 @@
 import { Injectable }    from '@angular/core';
 import { Http, Headers } from '@angular/http';
 
-import { Car } from './car';
+import { Entrega } from '../../../../common/entrega';
 
 @Injectable()
-export class CarService {
+export class RegistrarEntregaService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
   private taURL = 'http://localhost:3000';
 
   constructor(private http: Http) { }
 
-    create(car: Car): Promise<Car> {
-    return this.http.post(this.taURL + "/cars",JSON.stringify(car), {headers: this.headers})
+  create(entrega: Entrega): Promise<Entrega> {
+    return this.http.post(this.taURL + "/entregas",JSON.stringify(entrega), {headers: this.headers})
       .toPromise()
       .then(res => {
-        if (res.status === 201) {return car;} else {return null;}
+        if (res.status === 201) {return entrega;} else {return null;}
       })
       .catch(this.catch);
-  }
-
-  getCars(): Promise<Car[]> {
-    return this.http.get(this.taURL + "/cars")
-             .toPromise()
-             .then(res => res.json() as Car[])
-             .catch(this.catch);
   }
 
   private catch(erro: any): Promise<any>{
