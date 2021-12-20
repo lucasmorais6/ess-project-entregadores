@@ -27,7 +27,7 @@ servidor.post('/usuarios/cadastrar', (req: express.Request, res: express.Respons
     let nome = req.body.nome;
     let email = req.body.email;
     let senha = req.body.senha;
-
+//AQUI
     let usuario;
     if(req.body.hasOwnProperty('mascara')){
         usuario = new Entregador(cpf, nome, email, senha);
@@ -57,9 +57,9 @@ servidor.post('/usuarios/cadastrar', (req: express.Request, res: express.Respons
             })
         }
         else{
-            //console.log(usuarios);
+            // console.log(usuarios);
             usuarios.push(usuario);
-            //console.log(usuarios);
+            // console.log(usuarios);
 
             res.send({
                 success: 'Usuario cadastrado com sucesso!',
