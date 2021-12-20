@@ -17,12 +17,23 @@ import { CadastroService } from './cadastro/cadastro.service';
 
 import { NavbarComponent } from './navbar/navbar.component';
 
+import { EntregasComponent } from './entregas_disponiveis/entregas_disponiveis.component';
+import { EntregaService } from './entregas_disponiveis/entregas_disponiveis.service';
+import { MinhasEntregasComponent } from './minhas_entregas/minhas_entregas.component';
+import { MinhasEntregasService } from './minhas_entregas/minhas_entregas.service';
+import { RegistrarEntregaComponent } from './registrar_entrega/registrar_entrega.component';
+import { RegistrarEntregaService } from './registrar_entrega/registrar_entrega.service';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     CadastroComponent,
-    LoginComponent
+    LoginComponent,
+    EntregasComponent,
+    MinhasEntregasComponent,
+    RegistrarEntregaComponent
   ],
   imports: [
     BrowserModule,
@@ -34,15 +45,25 @@ import { NavbarComponent } from './navbar/navbar.component';
         path: 'cadastro',
         component: CadastroComponent
       },
-    ]),
-    RouterModule.forRoot([
       {
         path: 'login',
         component: LoginComponent
       },
+      {
+        path: 'entregas_disponiveis',
+        component: EntregasComponent
+      },
+      {
+        path: 'minhas_entregas',
+        component: MinhasEntregasComponent
+      },
+      {
+        path: 'registrar_entrega',
+        component: RegistrarEntregaComponent
+      }
     ]),
   ],
-  providers: [CadastroService, LoginService],
+  providers: [CadastroService, LoginService, EntregaService, MinhasEntregasService, RegistrarEntregaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

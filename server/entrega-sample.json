@@ -1,0 +1,9 @@
+{
+  "id": 1,
+  "restaurante": "Mc Donalds",
+  "endereco": "Rua Padre Roma 199",
+  "lucro": 10,
+  "tempo_preparo": 45,
+  "is_ativa": false,
+  "entregador_id": null
+}

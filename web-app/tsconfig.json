@@ -17,13 +17,14 @@
     "target": "es2017",
     "module": "es2020",
     "lib": [
-      "es2018",
+      "es2015",
       "dom"
     ]
   },
   "angularCompilerOptions": {
+    "strictNullChecks": false,
+    "strictPropertyInitialization": false,
     "enableI18nLegacyMessageIdFormat": false,
-    "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
   }

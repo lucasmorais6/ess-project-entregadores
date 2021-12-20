@@ -1,13 +1,15 @@
 {
-    "name": "tests-acceptance",
-    "version": "1.0.0",
-    "description": "acceptance tests from feature Cadastro_Login",
-    "main": "index.js",
-    "scripts": {
-      "tsc": "./node_modules/typescript/bin/tsc",
-      "test": "npm run tsc && protractor compiledCode/config/config.js",
-      "webdriver-update": "webdriver-manager update",
-      "webdriver-start": "webdriver-manager start"
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es5",
+        "moduleResolution": "node",
+        "sourceMap": false,
+        "declaration": false,
+        "removeComments": false,
+        "noImplicitAny": false,
+        "outDir": "typeScript",
+        "typeRoots": [ "./node_modules/@types" ],
+        "types": ["node","cucumber"]
     },
     "author": "",
     "license": "MIT",

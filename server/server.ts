@@ -1,12 +1,14 @@
 import express = require('express');
-//import bodyParser = require("body-parser");
+import bodyParser = require("body-parser");
+
 
 import { Usuario } from '../common/usuario';
 import { Entregador } from '../common/entregador';
 import { Cadastro } from './cadastro';
+import { EntregaService } from './src/entregas-service';
+import { Entrega } from '../common/entrega';
 
-
-var servidor = express();
+var app = express();
 
 var allowCrossDomain = function(req: any, res: any, next: any) {
     res.header('Access-Control-Allow-Origin', "*");
@@ -14,21 +16,80 @@ var allowCrossDomain = function(req: any, res: any, next: any) {
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
 }
+app.use(allowCrossDomain);
+app.use(express.json());
+app.use(bodyParser.json());
 
-servidor.use(allowCrossDomain);
-servidor.use(express.json());
-servidor.use(express.urlencoded({ extended: true}));
+//app.use(express.urlencoded({ extended: true}));
 
 let usuarios: Usuario[] = [];
 let usuario_sessao:Usuario = null;
 
-servidor.post('/usuarios/cadastrar', (req: express.Request, res: express.Response) => {
+var entregaService: EntregaService = new EntregaService();
+
+
+app.get('/entregas', function(req, res){
+  const entregas = entregaService.get();
+  res.send(JSON.stringify(entregas));
+});
+
+app.get('/entregas/disponiveis', function(req, res){
+  const entregas = entregaService.getByEntregadorIdNull();
+  res.send(JSON.stringify(entregas));
+});
+
+app.get('/entregas/:id', function(req, res){
+  const id = req.params.id;
+  const entrega = entregaService.getById(Number(id));
+  if (entrega) {
+    res.send(entrega);
+  } else {
+    res.status(404).send({ message: `Entrega ${id} could not be found`});
+  }
+});
+
+app.get('/entregas/entregador/:id', function(req, res){
+  const id = req.params.id;
+  const entregas = entregaService.getByEntregadorId(Number(id));
+  if (entregas) {
+    res.send(entregas);
+  } else {
+    res.status(404).send({ message: `Entregas from entregador ${id} could not be found`});
+  }
+});
+
+app.post('/entregas', function(req: express.Request, res: express.Response){
+  const entrega: Entrega = <Entrega> req.body;
+  try {
+    const result = entregaService.add(entrega);
+    if (result) {
+      res.status(201).send(result);
+    } else {
+      res.status(403).send({ message: "Entrega list is full"});
+    }
+  } catch (err) {
+    const {message} = err;
+    res.status(400).send({ message })
+  }
+});
+
+app.put('/entregas', function (req: express.Request, res: express.Response) {
+  const entrega: Entrega = <Entrega> req.body;
+  const result = entregaService.update(entrega);
+  if (result) {
+    res.send(result);
+  } else {
+    res.status(404).send({ message: `Entrega ${entrega.id} could not be found.`});
+  }
+});
+
+app.post('/usuarios/cadastrar', (req: express.Request, res: express.Response) => {
     let cpf = req.body.cpf;
     let nome = req.body.nome;
     let email = req.body.email;
     let senha = req.body.senha;
+//AQUI
     let usuario;
- 
     if(req.body.hasOwnProperty('mascara')){
         usuario = new Entregador(cpf, nome, email, senha);
     }
@@ -57,18 +118,23 @@ servidor.post('/usuarios/cadastrar', (req: express.Request, res: express.Respons
             })
         }
         else{
+            // console.log(usuarios);
+            usuarios.push(usuario);
+            // console.log(usuarios);
+
             res.send({
                 success: 'Usuario cadastrado com sucesso!',
             })
         }
+        console.log(usuarios);
     }
-})
+});
 
-servidor.get('/usuario', (req: express.Request, res: express.Response) => {
+app.get('/usuario', (req: express.Request, res: express.Response) => {
     res.send(JSON.stringify(Array.from(usuarios)));
-})
+});
 
-servidor.post('/login', (req: express.Request, res: express.Response) => {
+app.post('/login', (req: express.Request, res: express.Response) => {
     let email = req.body.email;
     let senha = req.body.senha;
     
@@ -102,9 +168,10 @@ servidor.post('/login', (req: express.Request, res: express.Response) => {
             })
         }
     }    
+    console.log(usuario_sessao);
 })
 
-servidor.post('/atualiza_cadastro', (req: express.Request, res: express.Response) => {
+app.post('/atualiza_cadastro', (req: express.Request, res: express.Response) => {
     if(usuario_sessao != null){
         let cpf = req.body.cpf;
         let nome = req.body.nome;
@@ -156,6 +223,8 @@ servidor.post('/atualiza_cadastro', (req: express.Request, res: express.Response
                     success: 'Atualizacao realizada com sucesso!',
                 })
             }
+            console.log(usuarios);
+            console.log(usuario_sessao);
         }
     }
     else{
@@ -165,25 +234,28 @@ servidor.post('/atualiza_cadastro', (req: express.Request, res: express.Response
     }  
 })
 
-servidor.get('/meu_usuario', (req: express.Request, res: express.Response) => {
+app.get('/meu_usuario', (req: express.Request, res: express.Response) => {
     res.send((usuario_sessao));
 })
 
-servidor.post('/desloga', (req: express.Request, res: express.Response) => {
+app.post('/desloga', (req: express.Request, res: express.Response) => {
 
     usuario_sessao = null;
     
     res.send({
         success: 'Usuario deslogado do sistema com sucesso!',
     })
+    
+    console.log(usuario_sessao);
 })
 
-var server = servidor.listen(3000, function () {
-    console.log('Example app listening on port 3000!')
- })
-  
+
+ var server = app.listen(3000, function () {
+    console.log('Entregadores app listening on port 3000!');
+  })
+
 function closeServer(): void {
     server.close();
 }
   
-export { servidor, closeServer }
+export { app, closeServer }
