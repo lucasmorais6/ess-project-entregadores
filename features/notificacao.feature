@@ -1,43 +1,40 @@
+Feature: Notificação de entregas
+    As a Entregador
+    I want to Ser notificado e acompanhar minhas entregas
+    So that Eu consiga realizar as entregas
+
 Scenario: Aceitar uma entrega recebida
-Given: Estou na página "Entregas Disponíveis"
-And: Existe uma nova entrega do restaurante "Mc Donalds" para o endereço "Rua do Futuro, 5, apto 701" com o valor de lucro para o entregador de "7 Reais"
-When: Aperto o botão "Aceitar Nova Entrega"
-Then: Tal nova entrega é iniciada para mim
-And: Sou redirecionado para a página "Acompanhamento de entrega"
-And: O endereço do restaurante “Mc Donalds” é apresentado
+Given Estou na página "Entregas Disponíveis"
+And Existe uma nova entrega do restaurante "Mc Donalds" para o endereço "Rua do Futuro, 199" com lucro de "15" reais, tempo de preparo de "45" minutos e de id "1"
+When Aperto o botão de aceitar a entrega de id "1"
+Then A entrega do restaurante "Mc Donalds" para o endereço "Rua do Futuro, 199" com lucro de "15" reais, tempo de preparo de "45" minutos e de id "1" não está mais na lista
 
-Scenario: Recusar uma entrega recebida
-Given: Estou na página "Novas Entregas"
-And: Existe uma nova entrega do restaurante "Mc Donalds" para o endereço "Rua do Futuro, 5, apto 701" com o valor de lucro para o entregador de "7 Reais"
-When: Aperto o botão "Rejeitar Nova Entrega"
-Then: Essa sugestão de nova entrega desaparece da lista
-And: Continuo na página "Novas Entregas"
+Scenario: Finalização de uma entrega ativa
+Given Estou na página "Minhas Entregas"
+And Uma entrega do restaurante "Mc Donalds" e de id "1" está ativa
+And Uma entrega do restaurante "Zio" e de id "2" está ativa
+When Finalizo a entrega de id "1"
+Then A entrega do restaurante "Zio" e de id "2" continua nas entregas ativas
+And A entrega do restaurante "Mc Donalds" e de id "1" é adicionada à lista de entregas finalizadas
 
-Scenario: Atualizar status da entrega após recebimento de pedido
-Given: Estou na página "Acompanhamento de entrega"
-And: A entrega do restaurante "Mc Donalds" para o endereço "Rua do Futuro, 5, apto 701" com o valor de lucro para o entregador de "7 Reais" foi aceita
-And: O endereço no app está para o restaurante "Mc Donalds"
-When: Alcanço o endereço do restaurante "Mc Donalds"
-And: O pedido é entregue para mim
-And: Aperto o botão "Confirmar recebimento de pedido"
-Then: O endereço de entrega é atualizado para "Rua do Futuro, 5, apto 701"
-And: Continuo na página "Acompanhamento de entrega"
+Scenario: Visualização de lucro total
+Given Estou na página "Minhas Entregas"
+And Possuo uma entrega do restaurante "Mc Donalds" e de id "1" finalizada, com lucro de "15" reais
+And Uma entrega do restaurante "Zio", com lucro de "10" reais e de id "2" está ativa
+And Só possuo "1" entregas finalizadas
+When Finalizo a entrega de id "2"
+Then O valor de lucro total é apresentado, que será igual a "25" reais
 
-Scenario: Concluir entrega do pedido no endereço
-Given: Estou na página "Acompanhamento de entrega"
-And: A minha entrega é do restaurante "Mc Donalds" para o endereço "Rua do Futuro, 5, apto 701" com o valor de lucro para o entregador de "7 Reais"
-And: O pedido já foi recolhido por mim do restaurante "Mc Donalds"
-And: O endereço de entrega está para o endereço "Rua do Futuro, 5, apto 701"
-When: Alcanço o endereço "Rua do Futuro, 5, apto 701"
-And: O pedido é entregue ao cliente que solicitou o pedido
-And: Aperto o botão "Concluir entrega"
-Then: Recebo uma notificação que ganhei "7 reais"
-And: Retorno à página "Novas entregas"
-And: A entrega sumiu da lista da página "Novas entregas"
+Scenario: Cadastrando uma entrega a um entregador
+Given Existe uma entrega do restaurante "Zio" de id "2" disponível 
+And Existe um entregador chamado "Vicente da Silva" de id "0"
+When O entregador "Vicente da Silva" aceita a entrega do restaurante "Zio"
+Then A entrega do restaurante "Zio", de id "2", têm o campo "entregador_id" modificado para o id do entregador, "0"
+And O campo "is_ativa" da entrega se torna "true"
 
-Scenario: Recebendo notificação de nova entrega
-Given: Eu stou na página "Novas Entregas"
-And: A lista de novas entregas está com apenas uma entrega, a do restaurante "Zio" para o endereço "Av. José Osório, 202" com o valor de lucro para o entregador de "4 Reais"
-When: Surge no sistema uma nova entrega do restaurante "Bugaloo" para o endereço "Rua Padre Roma, 209" com o valor de lucro para o entregador de "10 Reais"
-Then: Continuo na página "Novas Entregas"
-And: A lista de novas entregas é atualizada, agora com "2" entregas, a do restaurante "Zio" e a do "Mc Donalds"
+Scenario: Finalização de uma entrega por um entregador
+Given Existe um entregador chamado "Vicente da Silva" de id "0"
+And Existe uma entrega do restaurante "Zio" de id "2" cadastrada para o entregador de id "0"
+When O entregador finaliza a entrega
+Then O campo "is_ativa" da entrega se torna "false"
+

@@ -74,7 +74,7 @@ app.put('/entregas', function (req: express.Request, res: express.Response) {
 })
 
 var server = app.listen(3000, function () {
-  console.log('Entregadorezzs app listening on port 3000!');
+  console.log('Entregadores app listening on port 3000!');
 })
 
 function closeServer(): void {

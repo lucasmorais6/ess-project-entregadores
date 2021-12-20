@@ -11,12 +11,12 @@
    </tr>
    <tr *ngFor="let entrega of entregas">
       
-         <td *ngIf="entrega.is_ativa">{{entrega.restaurante}}</td>
+         <td *ngIf="entrega.is_ativa" id="entrega_ativa-{{entrega.restaurante}}-{{entrega.id}}">{{entrega.restaurante}}</td>
          <td *ngIf="entrega.is_ativa">{{entrega.endereco}}</td>
          <td *ngIf="entrega.is_ativa">{{entrega.tempo_preparo}}</td>
-         <td *ngIf="entrega.is_ativa">{{entrega.lucro}}</td>
+         <td *ngIf="entrega.is_ativa" id="entrega_ativa_lucro-{{entrega.restaurante}}-{{entrega.id}}-{{entrega.lucro}}">{{entrega.lucro}}</td>
          <td *ngIf="entrega.is_ativa">
-            <button id="finalizar_entrega" (click)="finalizarEntrega(entrega)">Finalizar</button>
+            <button id="finalizar_entrega-{{entrega.id}}" (click)="finalizarEntrega(entrega)">Finalizar</button>
          </td>
       
    </tr>
@@ -31,14 +31,14 @@
       <th>Lucro</th>
    </tr>
    <tr *ngFor="let entrega of entregas">
-         <td *ngIf="!entrega.is_ativa">{{entrega.restaurante}}</td>
+         <td *ngIf="!entrega.is_ativa" id="entrega_finalizada-{{entrega.restaurante}}-{{entrega.id}}">{{entrega.restaurante}}</td>
          <td *ngIf="!entrega.is_ativa">{{entrega.endereco}}</td>
-         <td *ngIf="!entrega.is_ativa">{{entrega.tempo_preparo}}</td>
-         <td *ngIf="!entrega.is_ativa">{{entrega.lucro}}</td>
+         <td *ngIf="!entrega.is_ativa" id="item_finalizado">{{entrega.tempo_preparo}}</td>
+         <td *ngIf="!entrega.is_ativa" id="entrega_finalizada_lucro-{{entrega.restaurante}}-{{entrega.id}}-{{entrega.lucro}}">{{entrega.lucro}}</td>
 </tr>
 </table>
 
 <div><h2>Lucro total</h2></div>
-<label >Você obteve um lucro total de R${{getLucro()}}!</label>
+<label id="lucro-{{getLucro()}}">Você obteve um lucro total de R${{getLucro()}}!</label>
 
    

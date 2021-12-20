@@ -5,7 +5,6 @@ export class EntregaService {
   idCount: number = 0;
   
   add(entrega: Entrega): Entrega {
-    console.log("sasasasa")
     var newEntrega = <Entrega>{id: this.idCount, ...entrega}
     if (newEntrega.lucro <= 0) {
       throw Error("Lucro tem que ser um valor positivo maior que zero")
@@ -20,7 +19,19 @@ export class EntregaService {
 
   update(entrega: Entrega) : Entrega {
     var result : Entrega = this.entregas.find(e => e.id == entrega.id);
-    if (result) result.update(entrega);
+    console.log(result);
+
+    //isso aqui fere o conceito de possuir uma solid architecture mas
+    //precisei deixar assim pois começou a ter problema com a função update de entrega
+    //e não consegui resolver
+    result.id = entrega.id;
+    result.endereco = entrega.endereco;
+    result.entregador_id = entrega.entregador_id;
+    result.is_ativa = entrega.is_ativa;
+    result.lucro = entrega.lucro;
+    result.restaurante = entrega.restaurante;
+    result.tempo_preparo = entrega.tempo_preparo;
+    //if (result) result.update(entrega);
     return result;
   }
 

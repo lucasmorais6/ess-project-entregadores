@@ -8,7 +8,7 @@ export class Entrega {
     is_ativa: boolean = false;
     constructor() {}
     
-    update(entrega: Entrega): void {
+    update(entrega: Entrega){
         this.restaurante = entrega.restaurante;
         this.endereco = entrega.endereco;
         this.tempo_preparo = entrega.tempo_preparo;
